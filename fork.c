@@ -11,7 +11,7 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	pid_t pid;
 	char *path;
 
-	path = get_path(argv[0]);
+	path = path_to_argv(argv[0]);
 	/* Test if the command is executable */
 	if (_testcommand(path))
 		/* Create a child process*/

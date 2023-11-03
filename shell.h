@@ -32,7 +32,7 @@ char **parse_input(char *input, char ***argv);
 /*char **parse_input(char *input);*/
 bool _strtest(char *argv);
 bool _testcommand(const char *cmd);
-char *get_path(char *command);
+char *path_to_argv(char *command);
 void handle_exit(char **argv);
 void handle_cd(const char *path);
 int set_env(char **argv);

@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
- * get_path - find the path to a command
+ * path_to_argv - find the path to a command
  * @command: command-line argument
  * Return: path, if found, or null, if !exist
  */
-char *get_path(char *command)
+char *path_to_argv(char *command)
 {
 	const char *path = getenv("PATH");
 	struct stat buffer;
