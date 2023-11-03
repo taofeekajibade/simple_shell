@@ -17,8 +17,8 @@ char *path_to_argv(char *command)
 	path_copy = strdup(path);
 	if (!path_copy)
 		return (NULL);
-	cmd_len = _strlen(command);
-	path_token = strtok(path_copy, ":");
+	cmd_len = str_len(command);
+	path_token = str_tok(path_copy, ":");
 	while (path_token != NULL)
 	{
 		dir_len = strlen(path_token);
@@ -28,9 +28,9 @@ char *path_to_argv(char *command)
 			free(path_copy);
 			return (NULL);
 		}
-		_strcopy(file_path, path_token);
-		_strcat(file_path, "/");
-		_strcat(file_path, command);
+		str_cpy(file_path, path_token);
+		str_cat(file_path, "/");
+		str_cat(file_path, command);
 		if (stat(file_path, &buffer) == 0)
 		{
 			free(path_copy);
@@ -39,7 +39,7 @@ char *path_to_argv(char *command)
 		else
 		{
 			free(file_path);
-			path_token = strtok(NULL, ":");
+			path_token = str_tok(NULL, ":");
 		}
 	}
 	free(path_copy);

@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
- * _fexit - A function to exit the shell.
- * @argv: Double pointer to an array of strings.
+ * handle_exit - A function to exit the shell.
+ * @argv: pointer exit argument.
  */
 void handle_exit(char **argv)
 {

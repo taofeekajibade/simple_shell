@@ -9,7 +9,7 @@ char **parse_input(char *input, char ***argv)
 {
 	size_t i = 0, token_size = MAX_INPUT;
 	char **tokens = malloc(token_size * sizeof(char *));
-	char *token = strtok(input, DELIM);
+	char *token = str_tok(input, DELIM);
 
 	if (!tokens)
 	{
@@ -18,7 +18,7 @@ char **parse_input(char *input, char ***argv)
 	}
 	while (token)
 	{
-		tokens[i] = malloc(sizeof(char) * (_strlen(token) + 1));
+		tokens[i] = malloc(sizeof(char) * (str_len(token) + 1));
 		if (!tokens[i])
 		{
 			perror("hsh: allocation error");
@@ -26,7 +26,7 @@ char **parse_input(char *input, char ***argv)
 			free(token);
 			exit(EXIT_FAILURE);
 		}
-		_strcopy(tokens[i], token);
+		str_cpy(tokens[i], token);
 		i++;
 		if (i >= token_size)
 		{
@@ -40,7 +40,7 @@ char **parse_input(char *input, char ***argv)
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = strtok(NULL, DELIM);
+		token = str_tok(NULL, DELIM);
 	}
 	tokens[i] = NULL;
 	/* Update the pointer passed as an argument */
@@ -49,18 +49,18 @@ char **parse_input(char *input, char ***argv)
 }
 
 /**
- * _strtest - Tests if a given string starts with specific characters.
+ * str_test - Tests if a given string starts with specific characters.
  * @argv: String to test
  *
  * Return: true on success, false om failure
  */
-bool _strtest(char *argv)
+bool str_test(char *argv)
 {
 	int i;
 	char control[] = "/usr/bin/";
 
-	int cntrl_len = _strlen(control);
-	int arg_len = _strlen(argv);
+	int cntrl_len = str_len(control);
+	int arg_len = str_len(argv);
 
 	if (cntrl_len > arg_len)
 		return (false);
@@ -73,12 +73,12 @@ bool _strtest(char *argv)
 }
 
 /**
- * _testcommand - Tests if a command is executable.
+ * test_command - Tests if a command is executable.
  * @cmd: Command to test
  *
  * Return: Void
  */
-bool _testcommand(const char *cmd)
+bool test_command(const char *cmd)
 {
 	return (access(cmd, X_OK) == 0);
 }

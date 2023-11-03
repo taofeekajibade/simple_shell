@@ -7,11 +7,11 @@ void handle_cd(const char *path)
 {
 	char *current_dir = getcwd(NULL, 0);
 
-	if (path == NULL || _strcmp(path, "") == 0)
+	if (path == NULL || str_cmp(path, "") == 0)
 	{
 		path = getenv("HOME");
 	}
-	else if (_strcmp(path, "-") == 0)
+	else if (str_cmp(path, "-") == 0)
 	{
 		path = getenv("OLDPWD");
 	}

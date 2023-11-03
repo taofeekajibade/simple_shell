@@ -13,7 +13,7 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 
 	path = path_to_argv(argv[0]);
 	/* Test if the command is executable */
-	if (_testcommand(path))
+	if (test_command(path))
 		/* Create a child process*/
 		pid = fork();
 	else
@@ -53,23 +53,23 @@ void executeCommand(int ac, char **argv, char **env)
 
 	if (argv[0] == NULL)
 		return;
-	if (_strcmp(argv[0], "exit") == 0)
+	if (str_cmp(argv[0], "exit") == 0)
 	{
 		handle_exit(argv);
 	}
-	else if (_strcmp(argv[0], "cd") == 0)
+	else if (str_cmp(argv[0], "cd") == 0)
 	{
 		handle_cd(argv[1]);
 	}
-	else if (_strcmp(argv[0], "setenv") == 0)
+	else if (str_cmp(argv[0], "setenv") == 0)
 	{
 		set_env(argv);
 	}
-	else if (_strcmp(argv[0], "unsetenv") == 0)
+	else if (str_cmp(argv[0], "unsetenv") == 0)
 	{
 		unset_env(argv);
 	}
-	else if (_strcmp(argv[0], "env") == 0)
+	else if (str_cmp(argv[0], "env") == 0)
 	{
 		print_env(env);
 	}

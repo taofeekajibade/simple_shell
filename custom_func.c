@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * _strlen - A Function to find the length a string.
+ * str_len - A Function to find the length a string.
  * @str: string to count.
  *
  * Return: Number of characters.
  */
-int _strlen(char *str)
+int str_len(char *str)
 {
 	int len = 0;
 
@@ -17,13 +17,13 @@ int _strlen(char *str)
 }
 
 /**
- * _strcopy - A Function to copy a string.
+ * str_cpy - A Function to copy a string.
  * @dest: Pointer to newly made string.
  * @src: Pointer to string being copied.
  *
  * Return: Number of characters.
  */
-char *_strcopy(char *dest, char *src)
+char *str_cpy(char *dest, char *src)
 {
 	int i;
 
@@ -36,18 +36,18 @@ char *_strcopy(char *dest, char *src)
 }
 
 /**
- * _strcat - A Function to concatenate a string
+ * str_cat - A Function to concatenate a string
  * @dest: String to modify.
  * @src: String to modify with.
  *
  * Return: Newly modified string.
  */
-char *_strcat(char *dest, char *src)
+char *str_cat(char *dest, char *src)
 {
 	int i, len1, len2;
 
-	len1 = _strlen(dest);
-	len2 = _strlen(src);
+	len1 = str_len(dest);
+	len2 = str_len(src);
 
 	for (i = 0; i <= len2; i++)
 	{

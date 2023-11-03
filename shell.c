@@ -4,7 +4,6 @@
  * @ac: argument count
  * @argv: argument vectors
  * @env: environment variables
- *
  * Return: 0 on success, 1 on failure.
  */
 int main(int ac, char **argv, char **env)
@@ -20,9 +19,7 @@ int main(int ac, char **argv, char **env)
 		input = read_input();
 		if (input != NULL)
 		{
-			/* Remove the newline character from the end of the input*/
 			input[strcspn(input, "\n")] = '\0';
-			/* Check if the input is not empty*/
 			if (input[0] != '\0')
 			{
 				parse_input(input, &argv);
