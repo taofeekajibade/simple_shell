@@ -16,8 +16,6 @@
 #define DELIM " \n"
 #define INVALID_EXIT "Invalid exit value\n"
 #define OUT_OF_RANGE "Value out of range (0 - 255)\n"
-#define SHELL "./hsh: 1: "
-#define SHELL_ERROR "hsh"
 #define SHELL_INFO "Usage: cd <directory>\n"
 #define SHELL_HOME "Changed to HOME directory\n"
 
