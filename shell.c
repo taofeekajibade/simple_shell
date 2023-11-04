@@ -9,15 +9,22 @@
 int main(int ac, char **argv, char **env)
 {
 	char *input = NULL;
+	int is_terminal = isatty(STDIN_FILENO);
 
 	signal(SIGINT, signal_c);
 
 	while (1)
 	{
-		shell_init();
+		if (is_terminal)
+			write(STDOUT_FILENO, "$ ", 2);
 
-		input = read_input();
-		if (input != NULL)
+		input = get_line();
+		if (feof(stdin))
+		{
+			free(input);
+			exit(EXIT_SUCCESS);
+		}
+		else if (input != NULL)
 		{
 			input[strcspn(input, "\n")] = '\0';
 			if (input[0] != '\0')

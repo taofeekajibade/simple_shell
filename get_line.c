@@ -5,7 +5,7 @@
  */
 char *get_line(void)
 {
-	static char buffer[MAX_INPUT];
+	static char buffer[BUFFER_SIZE];
 	static size_t pos;
 	static size_t full;
 	char *line = NULL;
@@ -13,7 +13,7 @@ char *get_line(void)
 
 	while ((c = getchar()) != EOF && c != '\n')
 	{
-		if (pos == MAX_INPUT - 1)
+		if (pos == BUFFER_SIZE - 1)
 		{
 			full = 1;
 		}

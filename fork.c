@@ -12,23 +12,25 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	char *path;
 
 	path = path_to_argv(argv[0]);
-	/* Test if the command is executable */
-	if (test_command(path))
-		/* Create a child process*/
+	
+		/* Create a new process */
 		pid = fork();
-	else
-	{
-		error_handler(argv[0]);
-	}
+
 	if (pid < 0)
 	{
 		perror("hsh");
 		exit(EXIT_FAILURE);
 	}
 	/* begin the child process to execute the command */
-	if (pid == 0)
+	else if (pid == 0)
 	{
-		if (execve(path, argv, env) == -1)
+		/* Test if the command is executable */
+		if (access(path, F_OK) == -1)
+		{
+			error_handler(argv[0]);
+			_exit(errno);
+		}
+		else if (execve(path, argv, env) == -1)
 		{
 			error_handler(argv[0]);
 			exit(EXIT_FAILURE);

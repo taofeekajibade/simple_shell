@@ -1,11 +1,18 @@
 #include "shell.h"
 /**
- * shell_init - displays a prompt if shell is interactive
- *
+ *str_cmp - Function that that compares two character strings
+ *@str1: string 1
+ *@str2: string 2
+ *Return: 0 if strings are same or -1 on failure
  */
-void shell_init(void)
+int str_cmp(const char *str1, const char *str2)
 {
-	write(STDOUT_FILENO, "$ ", 2);
+	while (*str1 && *str2 && *str1 == *str2)
+	{
+		str1++;
+		str2++;
+	}
+	return (*str1 - *str2);
 }
 
 /**
