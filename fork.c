@@ -12,9 +12,9 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	char *path;
 
 	path = path_to_argv(argv[0]);
-	
-		/* Create a new process */
-		pid = fork();
+
+	/* Create a new process */
+	pid = fork();
 
 	if (pid < 0)
 	{
