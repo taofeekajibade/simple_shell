@@ -12,7 +12,6 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	char *path;
 
 	path = path_to_argv(argv[0]);
-
 	/* Create a new process */
 	pid = fork();
 
@@ -38,12 +37,13 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	}
 	else
 	{
-		/* In the parent process, wait for the child to complete*/
+		/* In the parent process, wait for the child to complete */
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			WEXITSTATUS(status);
 	}
 }
+
 /**
  * executeCommand - executes user commands
  * @ac: argument count
@@ -56,27 +56,20 @@ void executeCommand(int ac, char **argv, char **env)
 	if (argv[0] == NULL)
 		return;
 	if (str_cmp(argv[0], "exit") == 0)
-	{
 		handle_exit(argv);
-	}
+	
 	else if (str_cmp(argv[0], "cd") == 0)
-	{
 		handle_cd(argv[1]);
-	}
+
 	else if (str_cmp(argv[0], "setenv") == 0)
-	{
 		set_env(argv);
-	}
+
 	else if (str_cmp(argv[0], "unsetenv") == 0)
-	{
 		unset_env(argv);
-	}
+
 	else if (str_cmp(argv[0], "env") == 0)
-	{
 		print_env(env);
-	}
+
 	else
-	{
 		fork_process(ac, argv, env);
-	}
 }
