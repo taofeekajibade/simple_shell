@@ -24,7 +24,7 @@ void fork_process(int ac, char **argv, char **env);
 void executeCommand(int ac, char **argv, char **env);
 char *read_input(void);
 void error_handler(const char *command);
-void handle_signal(int sig);
+void signal_c(int sig);
 void free_all(char **argv);
 char **parse_input(char *input, char ***argv);
 /*char **parse_input(char *input);*/

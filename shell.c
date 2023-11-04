@@ -10,7 +10,7 @@ int main(int ac, char **argv, char **env)
 {
 	char *input = NULL;
 
-	signal(SIGINT, handle_signal);
+	signal(SIGINT, signal_c);
 
 	while (1)
 	{

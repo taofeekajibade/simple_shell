@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * handle_signal - handles  ctrl+C
+ * signal_c - handles  ctrl+C
  * @sig: parameter
  */
-void handle_signal(int sig)
+void signal_c(int sig)
 {
 	(void)sig;
 	write(STDOUT_FILENO, "\n$ ", 3);
