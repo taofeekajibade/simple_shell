@@ -19,6 +19,7 @@
 void fork_process(int ac, char **argv, char **env);
 void executeCommand(int ac, char **argv, char **env);
 void error_handler(const char *command);
+void p_error(const char *command);
 void signal_c(int sig);
 char *get_line(void);
 void free_all(char **argv);
