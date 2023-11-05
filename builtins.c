@@ -13,7 +13,7 @@ void handle_exit(char **argv)
 		{
 			if (!isdigit(argv[1][i]))
 			{
-				write(3, "exit code is invalid\n", 21);
+				write(2, "exit code is invalid\n", 21);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -21,7 +21,7 @@ void handle_exit(char **argv)
 
 		if (status < 0 || status > 255)
 		{
-			write(3, "value entered is out of range\n", 30);
+			write(2, "value entered is out of range\n", 30);
 			exit(EXIT_FAILURE);
 		}
 		exit(status);
@@ -50,22 +50,22 @@ void handle_cd(const char *path)
 	}
 	if (current_dir == NULL)
 	{
-		perror("getcwd");
+		perror("cannot access working directory");
 		return;
 	}
 	if (chdir(path) == -1)
 	{
-		perror("chdir");
+		p_error(path);
 		free(current_dir);
 		return;
 	}
 	if (setenv("PWD", getcwd(NULL, 0), 1) == -1)
 	{
-		perror("setenv");
+		perror("hsh");
 	}
 	if (setenv("OLDPWD", current_dir, 1) == -1)
 	{
-		perror("setenv");
+		perror("unable to set directory");
 	}
 	free(current_dir);
 }
@@ -79,7 +79,7 @@ int set_env(char **argv)
 {
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
-		write(3, "Usage: setenv VARIABLE VALUE\n", 25);
+		write(2, "Usage: setenv VARIABLE VALUE\n", 29);
 		return (-1);
 	}
 	if (setenv(argv[1], argv[2], 1) != 0)
@@ -99,7 +99,7 @@ int unset_env(char **argv)
 {
 	if (argv[1] == NULL)
 	{
-		write(3, "Usage: unsetenv VARIABLE\n", 21);
+		write(2, "Usage: unsetenv VARIABLE\n", 25);
 		return (-1);
 	}
 	if (unsetenv(argv[1]) != 0)
