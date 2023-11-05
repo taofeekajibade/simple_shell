@@ -11,7 +11,7 @@ char *get_line(void)
 	char *line = NULL;
 	int c;
 
-	while ((c = getchar()) != EOF && c != '\n')
+	while ((c =  getchar()) != EOF && c != '\n')
 	{
 		if (pos == BUFFER_SIZE - 1)
 		{
