@@ -23,7 +23,6 @@ char **parse_input(char *input, char ***argv)
 		{
 			perror("hsh: allocation error");
 			free_all(tokens);
-			free(token);
 			exit(EXIT_FAILURE);
 		}
 		str_cpy(tokens[i], token);
@@ -35,15 +34,12 @@ char **parse_input(char *input, char ***argv)
 			if (!tokens)
 			{
 				perror("hsh: allocation error");
-				free_all(tokens);
-				free(token);
 				exit(EXIT_FAILURE);
 			}
 		}
 		token = str_tok(NULL, DELIMITER);
 	}
 	tokens[i] = NULL;
-	/* Update the pointer passed as an argument */
 	*argv = tokens;
 	return (tokens);
 }

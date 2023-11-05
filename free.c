@@ -9,10 +9,12 @@ void free_all(char **argv)
 {
 	int i = 0;
 
-	while (argv[i] != NULL)
+	if(!argv)
+		return;
+
+	for (i = 0; argv[i] != NULL; i++)
 	{
 		free(argv[i]);
-		i++;
 	}
 	free(argv);
 }

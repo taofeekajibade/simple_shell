@@ -9,34 +9,43 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 {
 	int status;
 	pid_t pid;
-	char *path;
+	char *path = path_to_argv(argv[0]);
 
-	path = path_to_argv(argv[0]);
+	if (!path)
+	{
+        error_handler(argv[0]);
+        return;
+    }
+
 	/* Create a new process */
 	pid = fork();
 
 	if (pid < 0)
 	{
 		perror("hsh");
+		free(path);
 		exit(EXIT_FAILURE);
 	}
 	/* begin the child process to execute the command */
 	else if (pid == 0)
 	{
 		/* Test if the command is executable */
-		if (access(path, F_OK) == -1)
+		if (access(path, X_OK) == -1)
 		{
 			error_handler(argv[0]);
+			free(path);
 			_exit(errno);
 		}
-		else if (execve(path, argv, env) == -1)
+		if (execve(path, argv, env) == -1)
 		{
 			error_handler(argv[0]);
-			exit(EXIT_FAILURE);
+			free(path);
+			_exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
+		free(path);
 		/* In the parent process, wait for the child to complete */
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))

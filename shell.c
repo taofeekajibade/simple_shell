@@ -9,7 +9,9 @@
 int main(int ac, char **argv, char **env)
 {
 	char *input = NULL;
+	char **args;
 	int is_terminal = isatty(STDIN_FILENO);
+	(void)argv;
 
 	signal(SIGINT, signal_c);
 
@@ -22,21 +24,25 @@ int main(int ac, char **argv, char **env)
 		if (feof(stdin))
 		{
 			free(input);
-			exit(EXIT_SUCCESS);
+			break;
+			/*exit(EXIT_SUCCESS);*/
 		}
-		else if (input != NULL)
+		if (input)
 		{
 			input[strcspn(input, "\n")] = '\0';
 			if (input[0] != '\0')
 			{
-				parse_input(input, &argv);
+				parse_input(input, &args);
 				if (ac > 0)
-					executeCommand(ac, argv, env);
-				free_all(argv);
+				{
+					executeCommand(ac, args, env);
+				}	
+				free_all(args);
 			}
-			free(input);
-			input = NULL;
 		}
+		free(input);
+		input = NULL;
 	}
+	free(input);
 	return (0);
 }
