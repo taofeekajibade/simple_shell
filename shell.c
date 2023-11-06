@@ -9,7 +9,8 @@
 int main(int ac, char **argv, char **env)
 {
 	char *input = NULL;
-	int i, is_terminal = isatty(STDIN_FILENO);
+	/*char **args;*/
+	int is_terminal = isatty(STDIN_FILENO);
 
 	signal(SIGINT, signal_c);
 	while (1)
@@ -17,37 +18,29 @@ int main(int ac, char **argv, char **env)
 		if (is_terminal)
 			write(STDOUT_FILENO, "$ ", 2);
 		input = read_line();
-
-		argv = parse_input(input, &argv);
-
-		executeCommand(ac, argv, env);
-
-		for (i = 0; argv[i] != NULL; i++)
+		if (input == NULL)
 		{
-			free(argv[i]);
-		}
-		free(argv);
-		free(input);
-		input = NULL;
-
-		/*
-		if (input)
-		{
-			input[strcspn(input, "\n")] = '\0';
-			if (input[0] != '\0')
+			if (feof(stdin))
 			{
-				argv = parse_input(input, &argv);
-				if (ac > 0)
-				{
-					executeCommand(ac, argv, env);
-				}	
-				free_all(argv);
+				free(input);
+				write(STDOUT_FILENO, "\n", 1);
+				break;
+			}
+			continue;
+		}
+		input[strcspn(input, "\n")] = '\0';
+		if (input[0] != '\0')
+		{
+			argv = parse_command(input);
+			if (argv)
+			{
+				executeCommand(ac, argv, env);
+				free(argv);
+				
 			}
 		}
 		free(input);
 		input = NULL;
-		*/
 	}
-	free(input);
 	return (0);
 }

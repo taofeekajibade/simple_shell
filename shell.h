@@ -24,6 +24,7 @@ void signal_c(int sig);
 char *get_line(void);
 void free_all(char **argv);
 char **parse_input(char *input, char ***argv);
+char **parse_command(char *user_line);
 char *read_line(void);
 char *path_to_argv(char *command);
 void handle_exit(char **argv);

@@ -51,8 +51,7 @@ char *read_line(void)
 			exit(EXIT_FAILURE);
 		}
 		free(usercmd);
-		usercmd = NULL;
-		
 	}
 	return (usercmd);
 }
+
