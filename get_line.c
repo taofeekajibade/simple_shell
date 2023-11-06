@@ -32,3 +32,27 @@ char *get_line(void)
 	}
 	return (line);
 }
+
+/**
+ * read_line- Function that reads lines and return them as strings
+ * Return: user input
+ */
+char *read_line(void)
+{
+	char *usercmd = NULL;
+
+	usercmd = get_line();
+	if (usercmd == NULL) /* Handle CTRL + D*/
+	{
+		if (feof(stdin))
+		{
+			free(usercmd);
+			write(STDOUT_FILENO, "\n", 1);
+			exit(EXIT_FAILURE);
+		}
+		free(usercmd);
+		usercmd = NULL;
+		
+	}
+	return (usercmd);
+}

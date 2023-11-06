@@ -81,4 +81,5 @@ void executeCommand(int ac, char **argv, char **env)
 
 	else
 		fork_process(ac, argv, env);
+	return;
 }

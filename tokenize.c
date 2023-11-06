@@ -8,12 +8,15 @@
 char **parse_input(char *input, char ***argv)
 {
 	size_t i = 0, token_size = BUFFER_SIZE;
-	char **tokens = malloc(token_size * sizeof(char *));
+	char **tokens;
 	char *token = str_tok(input, DELIMITER);
+	char **tmp;
 
+	tokens = malloc(token_size * sizeof(char *));
 	if (!tokens)
 	{
 		perror("hsh: allocation error");
+		free_all(tokens);
 		exit(EXIT_FAILURE);
 	}
 	while (token)
@@ -30,12 +33,14 @@ char **parse_input(char *input, char ***argv)
 		if (i >= token_size)
 		{
 			token_size *= 2;
-			tokens = realloc(tokens, token_size * sizeof(char *));
-			if (!tokens)
+			tmp = realloc(tokens, token_size * sizeof(char *));
+			if (!tmp)
 			{
 				perror("hsh: allocation error");
+				free_all(tokens);
 				exit(EXIT_FAILURE);
 			}
+			tokens = tmp;
 		}
 		token = str_tok(NULL, DELIMITER);
 	}
