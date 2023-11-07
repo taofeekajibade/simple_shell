@@ -17,7 +17,7 @@ int main(int ac, char **argv, char **env)
 	{
 		if (is_terminal)
 			write(STDOUT_FILENO, "$ ", 2);
-		input = read_line();
+		input = get_line();
 		if (input == NULL)
 		{
 			if (feof(stdin))
@@ -36,7 +36,7 @@ int main(int ac, char **argv, char **env)
 			{
 				executeCommand(ac, argv, env);
 				free(argv);
-				
+
 			}
 		}
 		free(input);

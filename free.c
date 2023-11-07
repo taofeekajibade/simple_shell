@@ -7,10 +7,7 @@
 
 void free_all(char **argv)
 {
-	int i = 0;
-
-	if(!argv)
-		return;
+	int i;
 
 	for (i = 0; argv[i] != NULL; i++)
 	{

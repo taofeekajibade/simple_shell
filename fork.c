@@ -13,9 +13,9 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 
 	if (!path)
 	{
-        error_handler(argv[0]);
-        return;
-    }
+		error_handler(argv[0]);
+		return;
+	}
 
 	/* Create a new process */
 	pid = fork();
@@ -66,7 +66,7 @@ void executeCommand(int ac, char **argv, char **env)
 		return;
 	if (str_cmp(argv[0], "exit") == 0)
 		handle_exit(argv);
-	
+
 	else if (str_cmp(argv[0], "cd") == 0)
 		handle_cd(argv[1]);
 
