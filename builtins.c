@@ -21,6 +21,7 @@ void handle_exit(char **argv)
 
 		if (status < 0 || status > 255)
 		{
+			free_all(argv);
 			write(2, "value entered is out of range\n", 30);
 			exit(EXIT_FAILURE);
 		}
@@ -28,6 +29,7 @@ void handle_exit(char **argv)
 	}
 	else
 	{
+		free_all(argv);
 		exit(EXIT_SUCCESS);
 	}
 }

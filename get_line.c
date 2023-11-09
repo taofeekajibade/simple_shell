@@ -25,6 +25,11 @@ char *get_line(void)
 	if (pos > 0)
 	{
 		line = malloc(pos + 1);
+		if (line == NULL)
+		{
+			free(line);
+			line = NULL;
+		}
 		memcpy(line, buffer, pos);
 		line[pos] = '\0';
 		pos = 0;
@@ -51,7 +56,7 @@ char *read_line(void)
 			exit(EXIT_FAILURE);
 		}
 		free(usercmd);
+		usercmd = NULL;
 	}
 	return (usercmd);
 }
-

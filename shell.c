@@ -2,14 +2,12 @@
 /**
  * main - Entry point for simple_shell program.
  * @ac: argument count
- * @argv: argument vectors
  * @env: environment variables
  * Return: 0 on success, 1 on failure.
  */
 int main(int ac, char **argv, char **env)
 {
 	char *input = NULL;
-	/*char **args;*/
 	int is_terminal = isatty(STDIN_FILENO);
 
 	signal(SIGINT, signal_c);
@@ -23,10 +21,12 @@ int main(int ac, char **argv, char **env)
 			if (feof(stdin))
 			{
 				free(input);
+				input = NULL;
 				write(STDOUT_FILENO, "\n", 1);
 				break;
 			}
-			continue;
+			free(input);
+			input = NULL;
 		}
 		input[strcspn(input, "\n")] = '\0';
 		if (input[0] != '\0')
@@ -36,11 +36,11 @@ int main(int ac, char **argv, char **env)
 			{
 				executeCommand(ac, argv, env);
 				free(argv);
-
-			}
+				argv = NULL;
+			}	
 		}
 		free(input);
 		input = NULL;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
