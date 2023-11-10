@@ -2,6 +2,7 @@
 /**
  * main - Entry point for simple_shell program.
  * @ac: argument count
+ * @argv: command-line arguments
  * @env: environment variables
  * Return: 0 on success, 1 on failure.
  */
@@ -37,7 +38,7 @@ int main(int ac, char **argv, char **env)
 				executeCommand(ac, argv, env);
 				free(argv);
 				argv = NULL;
-			}	
+			}
 		}
 		free(input);
 		input = NULL;

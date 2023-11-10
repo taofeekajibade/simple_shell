@@ -26,7 +26,7 @@ char **parse_command(char *user_line)
 		if (i >= bufsize)
 		{
 			bufsize += BUFFER_SIZE;
-			tokens = realloc(tokens, bufsize * sizeof(char*));
+			tokens = realloc(tokens, bufsize * sizeof(char *));
 			if (!tokens)
 			{
 				free_all(tokens);

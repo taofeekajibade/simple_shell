@@ -16,20 +16,15 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 		error_handler(argv[0]);
 		return;
 	}
-
-	/* Create a new process */
 	pid = fork();
-
 	if (pid < 0)
 	{
 		perror("hsh");
 		free(path);
 		exit(EXIT_FAILURE);
 	}
-	/* begin the child process to execute the command */
 	else if (pid == 0)
 	{
-		/* Test if the command is executable */
 		if (access(path, X_OK) == -1)
 		{
 			error_handler(argv[0]);
@@ -46,10 +41,7 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	else
 	{
 		free(path);
-		/* In the parent process, wait for the child to complete */
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			WEXITSTATUS(status);
 	}
 }
 
@@ -68,7 +60,7 @@ void executeCommand(int ac, char **argv, char **env)
 		handle_exit(argv);
 
 	else if (str_cmp(argv[0], "cd") == 0)
-		handle_cd(argv[1]);
+		handle_cd(argv);
 
 	else if (str_cmp(argv[0], "setenv") == 0)
 		set_env(argv);
@@ -81,5 +73,4 @@ void executeCommand(int ac, char **argv, char **env)
 
 	else
 		fork_process(ac, argv, env);
-	return;
 }

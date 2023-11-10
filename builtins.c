@@ -36,40 +36,46 @@ void handle_exit(char **argv)
 
 /**
  * handle_cd - changes directory
- * @path: working directory path
+ * @argv: working directory path
  */
-void handle_cd(const char *path)
+void handle_cd(char **argv)
 {
 	char *current_dir = getcwd(NULL, 0);
 
-	if (path == NULL || str_cmp(path, "") == 0)
-	{
-		path = getenv("HOME");
-	}
-	else if (str_cmp(path, "-") == 0)
-	{
-		path = getenv("OLDPWD");
-	}
 	if (current_dir == NULL)
 	{
+		free(current_dir);
 		perror("cannot access working directory");
 		return;
 	}
-	if (chdir(path) == -1)
+	if (argv[1] == NULL || str_cmp(argv[1], "") == 0)
 	{
-		p_error(path);
+		argv[1] = getenv("HOME");
+	}
+	if (str_cmp(argv[1], "-") == 0)
+	{
+		argv[1] = getenv("OLDPWD");
+	}
+	if (chdir(argv[1]) == -1)
+	{
+		p_error(argv[1]);
 		free(current_dir);
 		return;
 	}
 	if (setenv("PWD", getcwd(NULL, 0), 1) == -1)
 	{
-		perror("hsh");
+		perror("Unable to set PWD");
+		free(current_dir);
+		return;
 	}
 	if (setenv("OLDPWD", current_dir, 1) == -1)
 	{
-		perror("unable to set directory");
+		perror("Unable to set OLDPWD");
+		free(current_dir);
+		return;
 	}
 	free(current_dir);
+	current_dir = NULL;
 }
 
 /**

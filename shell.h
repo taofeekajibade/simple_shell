@@ -27,7 +27,7 @@ char **parse_command(char *user_line);
 char *read_line(void);
 char *path_to_argv(char *command);
 void handle_exit(char **argv);
-void handle_cd(const char *path);
+void handle_cd(char **argv);
 int set_env(char **argv);
 int unset_env(char **argv);
 void print_env(char **env);
