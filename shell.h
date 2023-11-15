@@ -17,6 +17,7 @@
 #define DELIMITER " \n"
 
 void prompt(void);
+void handle_exit(char **argv);
 void fork_process(int ac, char **argv, char **env);
 void executeCommand(int ac, char **argv, char **env);
 void error_handler(const char *command);
@@ -27,7 +28,7 @@ void free_all(char **argv);
 char **parse_command(char *user_line);
 char *read_line(void);
 char *path_to_argv(char *command);
-void handle_exit(char **argv);
+void handl_exit(char **argv);
 void handle_cd(char **argv);
 int set_env(char **argv);
 int unset_env(char **argv);

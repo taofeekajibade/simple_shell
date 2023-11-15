@@ -56,7 +56,6 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
  */
 void executeCommand(int ac, char **argv, char **env)
 {
-
 	if (argv[0] == NULL)
 		return;
 	if (str_cmp(argv[0], "exit") == 0)

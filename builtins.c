@@ -14,18 +14,20 @@ void handle_exit(char **argv)
 			if (!isdigit(argv[1][i]))
 			{
 				free(argv);
-				write(2, "exit code is invalid\n", 21);
+				write(3, "exit code is invalid\n", 21);
 				exit(EXIT_FAILURE);
 			}
 		}
 		status = atoi(argv[1]);
+		free_all(argv);
 
 		if (status < 0 || status > 255)
 		{
 			free(argv);
-			write(2, "value entered is out of range\n", 30);
+			write(3, "value entered is out of range\n", 30);
 			exit(EXIT_FAILURE);
 		}
+		argv = NULL;
 		exit(status);
 	}
 	else
@@ -78,6 +80,7 @@ void handle_cd(char **argv)
 	free(current_dir);
 	current_dir = NULL;
 }
+
 
 /**
  * set_env - set environment variable

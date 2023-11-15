@@ -24,10 +24,11 @@ int main(int ac, char **argv, char **env)
 				free(input);
 				input = NULL;
 				write(STDOUT_FILENO, "\n", 1);
-				break;
+				exit(EXIT_SUCCESS);
 			}
 			free(input);
 			input = NULL;
+			exit(EXIT_FAILURE);
 		}
 		input[strcspn(input, "\n")] = '\0';
 		if (input[0] != '\0')
