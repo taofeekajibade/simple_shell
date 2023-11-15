@@ -21,8 +21,8 @@ int str_cmp(const char *str1, const char *str2)
  */
 void error_handler(const char *command)
 {
-	const char *error_prefix = "hsh: ";
-	const char *error_message = ": command not found\n";
+	const char *error_prefix = "./hsh: ";
+	const char *error_message = "command not found\n";
 
 	write(STDERR_FILENO, error_prefix, strlen(error_prefix));
 	write(STDERR_FILENO, command, strlen(command));
