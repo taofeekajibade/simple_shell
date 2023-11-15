@@ -15,7 +15,7 @@ int main(int ac, char **argv, char **env)
 	while (1)
 	{
 		if (is_terminal)
-			write(STDOUT_FILENO, "$ ", 2);
+			prompt();
 		input = get_line();
 		if (input == NULL)
 		{

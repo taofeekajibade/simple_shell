@@ -16,6 +16,7 @@
 #define BUFFER_SIZE 64
 #define DELIMITER " \n"
 
+void prompt(void);
 void fork_process(int ac, char **argv, char **env);
 void executeCommand(int ac, char **argv, char **env);
 void error_handler(const char *command);

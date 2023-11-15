@@ -43,3 +43,12 @@ void p_error(const char *command)
 	write(STDERR_FILENO, command, strlen(command));
 	write(STDERR_FILENO, error_message, strlen(error_message));
 }
+
+/**
+ * prompt - displays prompt for user to enter values
+ */
+void prompt(void)
+{
+	printf("$ ");
+	fflush(stdout);
+}
