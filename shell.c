@@ -34,15 +34,11 @@ int main(int ac, char **argv, char **env)
 		if (input[0] != '\0')
 		{
 			argv = parse_command(input);
-			if (argv)
-			{
-				executeCommand(ac, argv, env);
-				free(argv);
-				argv = NULL;
-			}
+			executeCommand(ac, argv, env);
+			free(input);
+			free(argv);
+			argv = NULL;
 		}
-		free(input);
-		input = NULL;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -17,7 +17,7 @@ char **parse_command(char *user_line)
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(user_line, DELIMITER);
+	token = str_tok(user_line, DELIMITER);
 	while (token != NULL)
 	{
 		tokens[i] = token;
@@ -35,7 +35,7 @@ char **parse_command(char *user_line)
 			}
 		}
 
-		token = strtok(NULL, DELIMITER);
+		token = str_tok(NULL, DELIMITER);
 	}
 	tokens[i] = NULL;
 	return (tokens);

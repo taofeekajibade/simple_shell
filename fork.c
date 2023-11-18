@@ -13,14 +13,14 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 
 	if (!path)
 	{
-		perror("./hsh");
+		perror("hsh");
 		/*error_handler(argv[0]);*/
 		return;
 	}
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("./hsh");
+		perror("hsh");
 		free(path);
 		exit(EXIT_FAILURE);
 	}
@@ -28,14 +28,14 @@ void fork_process(int ac __attribute__((unused)), char **argv, char **env)
 	{
 		if (access(path, X_OK) == -1)
 		{
-			perror("./hsh");
+			perror("hsh");
 			/*error_handler(argv[0]);*/
 			free(path);
 			_exit(errno);
 		}
 		if (execve(path, argv, env) == -1)
 		{
-			perror("./hsh");
+			perror("hsh");
 			/*error_handler(argv[0]);*/
 			free(path);
 			_exit(EXIT_FAILURE);
